@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include includes/head %>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <% include includes/nav %>
+
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-12 p-5">
+          <div class="card-deck">
+            <% data.forEach(element => { %>
+            <div class="card">
+              <div class="card-header">
+                <%=element.titulo %>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <small>
+                    <%=element.descripcion %>
+                  </small>
+                </p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <strong>Nombre:</strong> <%=element.dueno %>
+                </li>
+                <li class="list-group-item">
+                  <strong>Comuna:</strong> <%=element.comuna %>
+                </li>
+                <li class="list-group-item">
+                  <strong>Precio:</strong> <%=element.precio %>
+                </li>
+                <li class="list-group-item">
+                  <strong>Telefono:</strong> <%=element.telefono %>
+                </li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link"
+                  ><i class="fas fa-check-circle"></i> Llamado</a
+                >
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"><%=element.fechaPublicacion %></small>
+              </div>
+            </div>
+
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- prettier-ignore -->
+    <% include includes/scripts %> 
+    <% include includes/footer %>
+  </body>
+</html>

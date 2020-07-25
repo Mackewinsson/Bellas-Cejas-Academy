@@ -3,6 +3,11 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+body,
+html {
+  overflow-x: hidden;
+}
+
 a {
   color: #00b7ff;
 }
