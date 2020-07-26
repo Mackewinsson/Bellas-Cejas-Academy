@@ -26,4 +26,19 @@ router.get("/clients", function (req, res, next) {
   });
 });
 
+// GET registro de usuarios
+router.get("/registro", function (req, res, next) {
+  res.render("registro", { title: "Registro" });
+});
+
+// GET contacto
+router.get("/iniciosesion", function (req, res, next) {
+  res.render("iniciosesion", { title: "Inicio sesion" });
+});
+
+// GET contacto
+router.get("/contacto", function (req, res, next) {
+  res.render("contacto", { title: "Contacto" });
+});
+
 module.exports = router;

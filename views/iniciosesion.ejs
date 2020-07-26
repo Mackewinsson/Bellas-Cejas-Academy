@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include includes/head %>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <% include includes/nav %>
+    <!-- CONTENTIDO AQUI ABAJO -->
+    <div class="container">
+      <div class="row">
+        <div class="col p-5">
+          <form class="p-4 bg-light rounded" action="POST">
+            <div class="col text-center mb-5"><h2>Inicia Sesion</h2></div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Correo Electronico</label>
+              <input
+                type="email"
+                class="form-control form-control-lg"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Ingresa tu correo electronico"
+              />
+              <small id="emailHelp" class="form-text text-muted"
+                >Tus datos estan seguros</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Contraseña</label>
+              <input
+                type="password"
+                class="form-control form-control-lg"
+                id="exampleInputPassword1"
+                placeholder="Ingresa tu contraseña"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg mt-4 btn-block">
+              Inicia sesion
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- prettier-ignore -->
+    <% include includes/scripts %> 
+    <% include includes/footer %>
+  </body>
+</html>
