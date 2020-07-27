@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-const { data } = require("../data/resultsObject.json");
+const express = require("express");
+const router = express.Router();
+const fs = require("fs");
 
 /* Handler function to wrap each route. */
 function asyncHandler(cb) {
@@ -19,22 +19,27 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET clients TESTING*/
-router.get("/clients", function (req, res, next) {
-  res.render("clients", {
-    title: "Client500",
-    data,
-  });
-});
+router.get(
+  "/clients",
+  asyncHandler((req, res, next) => {
+    let rawdata = fs.readFileSync("./resultsObject.json");
+    let data = JSON.parse(rawdata);
+    res.render("clients", {
+      title: "Clients",
+      data,
+    });
+  })
+);
 
 // GET registro de usuarios
-router.get("/registro", function (req, res, next) {
-  res.render("registro", { title: "Registro" });
-});
+// router.get("/registro", function (req, res, next) {
+//   res.render("registro", { title: "Registro" });
+// });
 
 // GET contacto
-router.get("/iniciosesion", function (req, res, next) {
-  res.render("iniciosesion", { title: "Inicio sesion" });
-});
+// router.get("/iniciosesion", function (req, res, next) {
+//   res.render("iniciosesion", { title: "Inicio sesion" });
+// });
 
 // GET contacto
 router.get("/contacto", function (req, res, next) {
