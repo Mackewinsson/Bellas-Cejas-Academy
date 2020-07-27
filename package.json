@@ -7,7 +7,6 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -15,10 +14,6 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.25",
-    "morgan": "~1.9.1",
-    "puppeteer": "^5.2.1",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
-    "tesseract.js": "^2.1.1"
+    "morgan": "~1.9.1"
   }
 }

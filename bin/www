@@ -7,7 +7,6 @@
 const app = require("../app");
 const debug = require("debug")("client500:server");
 const http = require("http");
-const yaposcrapper = require("../yapo/yapo");
 
 // (async () => {
 //   await yaposcrapper.scrape(
