@@ -1,19 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * Module dependencies.
+ * Module depende
  */
 
 const app = require("../app");
 const debug = require("debug")("client500:server");
 const http = require("http");
-
-// (async () => {
-//   await yaposcrapper.scrape(
-//     "https://www.yapo.cl/region_metropolitana/inmuebles?ca=15_s&l=0&f=p&w=1&cmn=314&cmn=320&cmn=327&cmn=343&st=s",
-//     1
-//   );
-// })();
 
 /**
  * Get port from environment and store in Express.
