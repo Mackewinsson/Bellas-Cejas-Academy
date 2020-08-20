@@ -3,13 +3,26 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const connectToMongo = require("./db/mongoConnection");
-
+const session = require("express-session");
 const indexRouter = require("./routes/index");
 const connectToMongoDb = require("./db/mongoConnection");
 
 const app = express();
 
+// use sessions for tracking logins
+app.use(
+  session({
+    secret: "client500 rocks",
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+
+// Make user id available in templates
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

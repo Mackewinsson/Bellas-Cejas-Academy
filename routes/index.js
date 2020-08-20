@@ -23,6 +23,64 @@ router.get(
   })
 );
 
+// GET Perfil
+router.get(
+  "/perfil",
+  asyncHandler((req, res, next) => {
+    if (!req.session.userId) {
+      const err = new Error("No estas autorizado para ver esta pagina");
+      err.status = 403;
+      return next(err);
+    }
+    User.findById(req.session.userId).exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        console.log(user.name);
+        return res.render("perfil", {
+          title: "Perfil",
+          name: user.name,
+        });
+      }
+    });
+  })
+);
+// GET LOGIN
+router.get(
+  "/login",
+  asyncHandler((req, res, next) => {
+    return res.render("login", {
+      title: "Log in",
+    });
+  })
+);
+
+// POST LOGIN
+router.post(
+  "/login",
+  asyncHandler((req, res, next) => {
+    console.log(req.body);
+    if (req.body.email && req.body.password) {
+      User.authenticate(req.body.email, req.body.password, function (
+        error,
+        user
+      ) {
+        if (error || !user) {
+          const err = new Error("Wrong emailo or password");
+          err.status = 401;
+          return next(err);
+        } else {
+          req.session.userId = user._id;
+          return res.redirect("/perfil");
+        }
+      });
+    } else {
+      const err = new Error("Email and password are required");
+      err.status = 401;
+      return next(err);
+    }
+  })
+);
 /* GET clients TESTING*/
 router.get(
   "/clients",
@@ -59,6 +117,7 @@ router.post(
       if (req.body.password !== req.body.confirmPassword) {
         const err = new Error("Passwords do not match.");
         err.status = 400;
+        console.log("err 1");
         return next(err);
       }
       // create an object with the USER data
@@ -70,14 +129,17 @@ router.post(
       // Create Schema
       User.create(userData, (error, user) => {
         if (error) {
+          console.log("err 2");
           return next(error);
         } else {
-          return res.redirect("/profile");
+          req.session.userId = user._id;
+          return res.redirect("/perfil");
         }
       });
     } else {
       const err = new Error("All fields required.");
       err.status = 400;
+      console.log("err 3");
       return next(err);
     }
   })
