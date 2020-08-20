@@ -1,3 +1,22 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include includes/head %>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <% include includes/nav %>
+    <!-- CONTENTIDO AQUI ABAJO -->
+    <div class="container">
+      <div class="row">
+        <div class="col p-5">
+          <h1><%= title %></h1>
+          <h4><%= message %></h4>
+        </div>
+      </div>
+    </div>
+    <!-- prettier-ignore -->
+    <% include includes/scripts %> 
+    <% include includes/footer %>
+  </body>
+</html>
