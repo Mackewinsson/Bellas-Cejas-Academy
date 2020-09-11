@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const User = require("../db/models/userSchema");
+const mid = require("../middleware");
 
 /* Handler function to wrap each route. */
 function asyncHandler(cb) {
@@ -45,9 +46,27 @@ router.get(
     });
   })
 );
+
+// GET LOGOUT
+router.get(
+  "/logout",
+  asyncHandler((req, res, next, err) => {
+    if (req.session) {
+      // delete the session
+      req.session.destroy(function () {
+        if (err) {
+          return next(err);
+        } else {
+          res.redirect("/");
+        }
+      });
+    }
+  })
+);
 // GET LOGIN
 router.get(
   "/login",
+  mid.loggedOut,
   asyncHandler((req, res, next) => {
     return res.render("login", {
       title: "Log in",
@@ -84,9 +103,11 @@ router.post(
 /* GET clients TESTING*/
 router.get(
   "/clients",
+  mid.requiresLogin,
   asyncHandler((req, res, next) => {
     let rawdata = fs.readFileSync("./resultsObject.json");
     let data = JSON.parse(rawdata);
+    console.log(data);
     res.render("clients", {
       title: "Clients",
       data,
@@ -97,6 +118,7 @@ router.get(
 // GET registro de usuarios
 router.get(
   "/registro",
+  mid.loggedOut,
   asyncHandler((req, res, next) => {
     res.status(200).render("registro", { title: "Registro" });
   })

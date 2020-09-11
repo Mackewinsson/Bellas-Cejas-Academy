@@ -6,8 +6,13 @@ const logger = require("morgan");
 const session = require("express-session");
 const indexRouter = require("./routes/index");
 const connectToMongoDb = require("./db/mongoConnection");
+const { Mongoose } = require("mongoose");
+const { db } = require("./db/models/userSchema");
+const MongoStore = require("connect-mongo")(session);
 
 const app = express();
+//Mongo connection
+connectToMongoDb();
 
 // use sessions for tracking logins
 app.use(
@@ -15,6 +20,9 @@ app.use(
     secret: "client500 rocks",
     resave: true,
     saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: db,
+    }),
   })
 );
 
@@ -58,6 +66,4 @@ app.use(function (err, req, res, next) {
   });
 });
 
-//Mongo connection
-connectToMongoDb();
 module.exports = app;
