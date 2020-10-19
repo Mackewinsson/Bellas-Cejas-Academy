@@ -14,15 +14,10 @@ a {
 /* NAVEGACION */
 
 nav#navegacion {
-  background: #485563; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #29323c,
-    #485563
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #29323c,
-    #485563
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: black;
+}
+
+body > div > div > div.col-12.text-center > div {
+  margin-top: 50px;
+  background-color: blue;
 }

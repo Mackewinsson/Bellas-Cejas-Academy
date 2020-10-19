@@ -20,7 +20,15 @@ function asyncHandler(cb) {
 router.get(
   "/",
   asyncHandler((req, res, next) => {
-    res.status(200).render("index", { title: "Client500" });
+    res.status(200).render("index", { title: "Bellas Cejas Academy" });
+  })
+);
+
+/* GET Contacto */
+router.get(
+  "/ayuda",
+  asyncHandler((req, res, next) => {
+    res.status(200).render("ayuda", { title: "Bellas Cejas Academy" });
   })
 );
 
@@ -102,14 +110,14 @@ router.post(
 );
 /* GET clients TESTING*/
 router.get(
-  "/clients",
+  "/curso-de-microblading",
   mid.requiresLogin,
   asyncHandler((req, res, next) => {
     let rawdata = fs.readFileSync("./resultsObject.json");
     let data = JSON.parse(rawdata);
     console.log(data);
-    res.render("clients", {
-      title: "Clients",
+    res.render("cursomicroblading", {
+      title: "Curso de Microblading",
       data,
     });
   })
@@ -118,7 +126,7 @@ router.get(
 // GET registro de usuarios
 router.get(
   "/registro",
-  mid.loggedOut,
+  mid.requiresMack,
   asyncHandler((req, res, next) => {
     res.status(200).render("registro", { title: "Registro" });
   })
@@ -126,6 +134,7 @@ router.get(
 // POST registro de usuarios
 router.post(
   "/registro",
+  mid.requiresMack,
   asyncHandler((req, res, next) => {
     // Check if all the fields are being sent
     console.log(req.body);

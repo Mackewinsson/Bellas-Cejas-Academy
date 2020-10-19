@@ -9,8 +9,19 @@
     <!-- CONTENTIDO AQUI ABAJO -->
     <div class="container">
       <div class="row">
-        <div class="col p-5">
+        <div class="col-12 mt-5">
           <p>Hola <%= name %>!</p>
+        </div>
+        <div class="col-12">
+          <% if (currentUser == '5f8db40de04b863393976831') { %>
+          <a
+            href="/registro"
+            class="btn btn-success my-2 my-sm-0 text-light"
+            type="submit"
+          >
+            Registrar nuevo usuario
+          </a>
+          <% } %>
         </div>
       </div>
     </div>
