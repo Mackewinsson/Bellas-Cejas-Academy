@@ -45,8 +45,7 @@ router.get(
       if (error) {
         return next(error);
       } else {
-        console.log(user.name);
-        return res.render("perfil", {
+        return res.status(200).render("perfil", {
           title: "Perfil",
           name: user.name,
         });
@@ -86,7 +85,6 @@ router.get(
 router.post(
   "/login",
   asyncHandler((req, res, next) => {
-    console.log(req.body);
     if (req.body.email && req.body.password) {
       User.authenticate(req.body.email, req.body.password, function (
         error,
@@ -98,7 +96,7 @@ router.post(
           return next(err);
         } else {
           req.session.userId = user._id;
-          return res.redirect("/perfil");
+          return res.status(200).redirect("/perfil");
         }
       });
     } else {
@@ -115,8 +113,7 @@ router.get(
   asyncHandler((req, res, next) => {
     let rawdata = fs.readFileSync("./resultsObject.json");
     let data = JSON.parse(rawdata);
-    console.log(data);
-    res.render("cursomicroblading", {
+    res.status(200).render("cursomicroblading", {
       title: "Curso de Microblading",
       data,
     });
@@ -137,7 +134,6 @@ router.post(
   mid.requiresMack,
   asyncHandler((req, res, next) => {
     // Check if all the fields are being sent
-    console.log(req.body);
     if (
       req.body.name &&
       req.body.email &&
@@ -148,7 +144,6 @@ router.post(
       if (req.body.password !== req.body.confirmPassword) {
         const err = new Error("Passwords do not match.");
         err.status = 400;
-        console.log("err 1");
         return next(err);
       }
       // create an object with the USER data
@@ -160,17 +155,15 @@ router.post(
       // Create Schema
       User.create(userData, (error, user) => {
         if (error) {
-          console.log("err 2");
           return next(error);
         } else {
           req.session.userId = user._id;
-          return res.redirect("/perfil");
+          return res.status(201).redirect("/perfil");
         }
       });
     } else {
       const err = new Error("All fields required.");
       err.status = 400;
-      console.log("err 3");
       return next(err);
     }
   })
@@ -186,7 +179,7 @@ router.post(
 
 // GET constacto
 router.get("/constacto", function (req, res, next) {
-  res.render("constacto", { title: "constacto" });
+  res.status(200).render("constacto", { title: "constacto" });
 });
 
 module.exports = router;
